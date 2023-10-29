@@ -1,19 +1,24 @@
-﻿namespace letssee
+using System;
+
+namespace letssee
 {
     class Program
     {
         static void Main(string[] args)
         {
-            var video = new Video() { Title = "Video 1 " };
+            string post = "Hello how are you doing damn this is quite a long text isnt it hahah blah blah blah";
+            var shortenedPost = post.Shorten(3);
 
-            var videoEncoder = new VideoEncoder(); // publisher
-            var mailService = new MailService(); // subscriber
-            var messageService = new MessageService(); // subscriber
+            IEnumerable<int> numbers = new List<int>() { 1, 5, 10, 18, 22 };
 
-            videoEncoder.VideoEncoded += mailService.OnVideoEncoded;
-            videoEncoder.VideoEncoded += messageService.OnVideoEncoded;
+            foreach (int num in numbers)
+            {
+                Console.WriteLine(num);
+            }
 
-            videoEncoder.Encode(video);
+            Console.WriteLine(numbers.Max());
+
+            Console.WriteLine(shortenedPost);
         }
     }
 }
