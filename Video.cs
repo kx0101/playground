@@ -1,6 +1,6 @@
 namespace letssee
 {
-    class Video
+    public class Video
     {
         public string? Title { get; set; }
     }
