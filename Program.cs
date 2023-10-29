@@ -18,7 +18,7 @@ namespace letssee
 
             Console.WriteLine(numbers.Max());
 
-            Console.WriteLine(shortenedPost);
+            Console.WriteLine('hi');
         }
     }
 }
