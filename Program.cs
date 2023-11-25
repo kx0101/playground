@@ -6,52 +6,39 @@ namespace letssee
         {
             Solution s = new Solution();
 
-            Print(s.FizzBuzz(15));
-        }
-
-        static void Print(IList<string> list)
-        {
-            foreach (var item in list)
-            {
-                Console.WriteLine(item);
-            }
+            Console.WriteLine(s.IsValid("()"));
+            Console.WriteLine(s.IsValid("()[]{}"));
+            Console.WriteLine(s.IsValid("(]"));
         }
 
     }
+
     public class Solution
     {
-        public IList<string> FizzBuzz(int n)
+        public bool IsValid(string s)
         {
-            Dictionary<int, string> map = new Dictionary<int, string>
+            var stack = new Stack<char>();
+            var pairs = new Dictionary<char, char>
             {
-                { 3, "Fizz" },
-                { 5, "Buzz" },
+                [')'] = '(',
+                [']'] = '[',
+                ['}'] = '{',
             };
 
-            List<string> result = new List<string>();
-
-            for (int i = 1; i <= n; i++)
+            foreach (char c in s)
             {
-                string output = "";
-                foreach (var entry in map)
+                if (!pairs.ContainsKey(c))
                 {
-
-                    if (i % entry.Key == 0)
-                    {
-                        output += entry.Value;
-                    }
+                    stack.Push(c);
                 }
-
-                if (output == "")
+                else if (stack.Count == 0 || stack.Pop() != pairs[c])
                 {
-                    output += i.ToString();
+                    return false;
                 }
-
-                result.Add(output);
-
             }
 
-            return result;
+            return stack.Count == 0;
         }
     }
+
 }
