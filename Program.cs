@@ -6,39 +6,58 @@ namespace letssee
         {
             Solution s = new Solution();
 
-            Console.WriteLine(s.IsValid("()"));
-            Console.WriteLine(s.IsValid("()[]{}"));
-            Console.WriteLine(s.IsValid("(]"));
+            ListNode head = new ListNode(1);
+            ListNode node1 = new ListNode(2);
+            ListNode node2 = new ListNode(3);
+            ListNode node3 = new ListNode(4);
+            ListNode node4 = new ListNode(5);
+
+            head.next = node1;
+            node1.next = node2;
+            node2.next = node3;
+            node3.next = node4;
+            node4.next = head;
+
+            Console.WriteLine(s.HasCycle(head));
         }
 
+    }
+
+    public class ListNode
+    {
+        public int val;
+        public ListNode next;
+        public ListNode(int val = 0, ListNode next = null)
+        {
+            this.val = val;
+            this.next = next;
+        }
     }
 
     public class Solution
     {
-        public bool IsValid(string s)
+        public bool HasCycle(ListNode head)
         {
-            var stack = new Stack<char>();
-            var pairs = new Dictionary<char, char>
+            if (head == null || head.next == null)
             {
-                [')'] = '(',
-                [']'] = '[',
-                ['}'] = '{',
-            };
+                return false;
+            }
 
-            foreach (char c in s)
+            ListNode fast = head;
+            ListNode slow = head;
+
+            while (fast != null && fast.next != null)
             {
-                if (!pairs.ContainsKey(c))
+                slow = slow.next;
+                fast = fast.next.next;
+
+                if (slow == fast)
                 {
-                    stack.Push(c);
-                }
-                else if (stack.Count == 0 || stack.Pop() != pairs[c])
-                {
-                    return false;
+                    return true;
                 }
             }
 
-            return stack.Count == 0;
+            return false;
         }
     }
-
 }
