@@ -4,46 +4,28 @@ namespace letssee
     {
         static void Main(string[] args)
         {
-            string word1 = "listen";
-            string word2 = "silent";
+            int fib = 9;
+            Dictionary<int, int> fibDict = new Dictionary<int, int>();
+            fibDict.Add(0, 0);
+            fibDict.Add(1, 1);
 
-            Console.WriteLine("Are the words {0} and {1} anagrams? {2}", word1, word2, Anagram(word1, word2));
+            Console.WriteLine("Fibonacci of {0} is {1}", fib, Fibonacci(fib, fibDict));
         }
 
-        static bool Anagram(string word1, string word2)
+        static int Fibonacci(int n, Dictionary<int, int> fibDict)
         {
-            if (word1.Length != word2.Length)
+            if (fibDict.ContainsKey(n))
             {
-                return false;
+                return fibDict[n];
             }
 
-            Dictionary<char, int> word1Dict = new Dictionary<char, int>();
-
-            foreach (char letter in word1)
+            for (int i = 2; i <= n; i++)
             {
-                if (word1Dict.ContainsKey(letter))
-                {
-                    word1Dict[letter]++;
-                }
-                else
-                {
-                    word1Dict.Add(letter, 1);
-                }
+                if (!fibDict.ContainsKey(i))
+                    fibDict.Add(i, fibDict[i - 1] + fibDict[i - 2]);
             }
 
-            foreach (char letter in word2)
-            {
-                if (word1Dict.ContainsKey(letter))
-                {
-                    word1Dict[letter]--;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-
-            return true;
+            return fibDict[n];
         }
     }
 }
