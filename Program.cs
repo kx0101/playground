@@ -4,60 +4,46 @@ namespace letssee
     {
         static void Main(string[] args)
         {
-            Solution s = new Solution();
+            string word1 = "listen";
+            string word2 = "silent";
 
-            ListNode head = new ListNode(1);
-            ListNode node1 = new ListNode(2);
-            ListNode node2 = new ListNode(3);
-            ListNode node3 = new ListNode(4);
-            ListNode node4 = new ListNode(5);
-
-            head.next = node1;
-            node1.next = node2;
-            node2.next = node3;
-            node3.next = node4;
-            node4.next = head;
-
-            Console.WriteLine(s.HasCycle(head));
+            Console.WriteLine("Are the words {0} and {1} anagrams? {2}", word1, word2, Anagram(word1, word2));
         }
 
-    }
-
-    public class ListNode
-    {
-        public int val;
-        public ListNode next;
-        public ListNode(int val = 0, ListNode next = null)
+        static bool Anagram(string word1, string word2)
         {
-            this.val = val;
-            this.next = next;
-        }
-    }
-
-    public class Solution
-    {
-        public bool HasCycle(ListNode head)
-        {
-            if (head == null || head.next == null)
+            if (word1.Length != word2.Length)
             {
                 return false;
             }
 
-            ListNode fast = head;
-            ListNode slow = head;
+            Dictionary<char, int> word1Dict = new Dictionary<char, int>();
 
-            while (fast != null && fast.next != null)
+            foreach (char letter in word1)
             {
-                slow = slow.next;
-                fast = fast.next.next;
-
-                if (slow == fast)
+                if (word1Dict.ContainsKey(letter))
                 {
-                    return true;
+                    word1Dict[letter]++;
+                }
+                else
+                {
+                    word1Dict.Add(letter, 1);
                 }
             }
 
-            return false;
+            foreach (char letter in word2)
+            {
+                if (word1Dict.ContainsKey(letter))
+                {
+                    word1Dict[letter]--;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }
