@@ -11,6 +11,7 @@ namespace letssee
             ListNode node2 = new ListNode(3);
             ListNode node3 = new ListNode(4);
             ListNode node4 = new ListNode(5);
+            ListNode master = new ListNode(10);
             ListNode node5 = new ListNode(6);
 
             head.next = node1;
