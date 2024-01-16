@@ -1,8 +1,8 @@
 # Oh boy master conflicts
 # Lets do some conflicts
 
-# lets do one more
+# hmm - from feature branch
 
-# and another one
+# and another one - from target branch
 
-# and a last one
+# hmm number three - from feature branch
