@@ -12,6 +12,7 @@ namespace letssee
             ListNode node3 = new ListNode(4);
             ListNode node4 = new ListNode(5);
             ListNode node5 = new ListNode(6);
+            ListNode node6 = new ListNode(7);
 
             head.next = node1;
             node1.next = node2;
